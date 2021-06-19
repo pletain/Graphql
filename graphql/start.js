@@ -14,4 +14,4 @@ const root = {
 
 graphql(schema, '{ nodejs }', root).then((response) => {
   console.log(response);
-});
+});  

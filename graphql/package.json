@@ -1,7 +1,7 @@
 {
   "name": "start",
   "version": "1.0.0",
-  "description": "",
+  "description": "## 데이터 읽기 ``` { \tgetProduct( id : 1 ) { \t    id         price         name \t} } ```",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,6 +12,15 @@
   "dependencies": {
     "express": "^4.17.1",
     "express-graphql": "^0.11.0",
-    "graphql": "^15.3.0"
-  }
+    "graphql": "^15.5.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/parkjunyoung/fc-graphql-start.git"
+  },
+  "bugs": {
+    "url": "https://github.com/parkjunyoung/fc-graphql-start/issues"
+  },
+  "homepage": "https://github.com/parkjunyoung/fc-graphql-start#readme",
+  "devDependencies": {}
 }
