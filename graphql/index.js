@@ -26,6 +26,7 @@ const schema = buildSchema(`
 	type Mutation {
 				addProduct( input : ProductInput ) : Product
 				updateProduct( id : ID! , input : ProductInput! ) : Product
+				deleteProduct( id : ID! ) : String
 	}
 
 `);
@@ -60,8 +61,15 @@ const root = {
 					...input //안에서 입력됐던 값들이 펼쳐짐
 			}
 			return products[index];
-	}
+	},
+	deleteProduct : ( { id } ) => {
+					const index = products.findIndex(product => product.id === parseInt(id) )
+					products.splice( index , 1)
+					return "remove success!";	
+			}
 };
+
+
 
 
 
@@ -71,6 +79,10 @@ app.use( '/graphql', graphqlHTTP({
   rootValue: root,
   graphiql: true,
 }));
+
+
+app.use( '/static' , express.static('static') )
+
 
 app.listen(3000, () => {
   console.log('Running a GraphQL API server at localhost:4000/graphql');
