@@ -7,6 +7,12 @@ const { buildSchema } = require('graphql');
 
 const schema = buildSchema(`
 
+	input ProductInput{ 
+			name : String
+			price : Int
+			description : String
+	}
+
 	type Product {
 		id : ID! 
 		name : String
@@ -16,6 +22,11 @@ const schema = buildSchema(`
     type Query {
         getProduct( id : ID! ) : Product
     }
+
+	type Mutation {
+				addProduct( input : ProductInput ) : Product
+	}
+
 `);
 
 
@@ -32,7 +43,13 @@ const products = [{
 }]
 
 const root = { 
-	getProduct : ({ id }) => products.find( product => product.id == parseInt(id) )
+	getProduct : ({ id }) => products.find( product => product.id == parseInt(id) ),
+	
+	addProduct : ({ input }) => {
+			input.id = parseInt(products.length + 1);
+			products.push(input);
+			return root.getProduct({ id : input.id })
+	}
 };
 
 const app = express();
